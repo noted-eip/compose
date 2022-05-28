@@ -1,4 +1,8 @@
+# Repositories
 accounts-service/
 notes-service/
 recommendations-service/
 api-gateway/
+
+# IDE
+.vscode
