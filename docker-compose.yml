@@ -3,17 +3,28 @@ version: "3"
 services:
   accounts:
     build: ./accounts-service
+    environment:
+      - ACCOUNTS_SERVICE_ENV=production
+      - ACCOUNTS_SERVICE_PORT=3000
+      - ACCOUNTS_SERVICE_MONGO_URI=mongodb://mongo:27017
+      - ACCOUNTS_SERVICE_MONGO_DB_NAME=accounts-service
 
-  notes:
-    build: ./notes-service
+  # Those services are disabled for now because they've not been released.
+  #
+  # notes:
+  #   build: ./notes-service
 
-  recommendations:
-    build: ./recommendations-service
+  # recommendations:
+  #   build: ./recommendations-service
 
   gateway:
     build: ./api-gateway
     ports:
-      - 3000:80
+      - 3000:3000
+    environment:
+      - APIGW_ENV=production
+      - APIGW_PORT=3000
+      - APIGW_ACCOUNTS_SERVICE_ADDR=accounts:3000
 
   mongo:
     image: mongo
