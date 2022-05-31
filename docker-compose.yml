@@ -9,13 +9,21 @@ services:
       - ACCOUNTS_SERVICE_MONGO_URI=mongodb://mongo:27017
       - ACCOUNTS_SERVICE_MONGO_DB_NAME=accounts-service
 
+  recommendations:
+    build: ./recommendations-service
+    environment:
+      - RECOMMENDATIONS_SERVICE_PORT=3000
+      - RECOMMENDATIONS_SERVICE_LANG=fr
+      # Yake Algorithm
+      - RECOMMENDATIONS_SERVICE_NUMBER_OF_KEYWORDS=7
+      - RECOMMENDATIONS_SERVICE_CO_OCCURENCE_WINDOW=3
+      - RECOMMENDATIONS_SERVICE_N_GRAM_LENGTH=2
+      - RECOMMENDATIONS_SERVICE_THRESHOLD=0.8
+
   # Those services are disabled for now because they've not been released.
   #
   # notes:
   #   build: ./notes-service
-
-  # recommendations:
-  #   build: ./recommendations-service
 
   gateway:
     build: ./api-gateway
