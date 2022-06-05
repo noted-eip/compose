@@ -14,7 +14,6 @@ services:
     environment:
       - RECOMMENDATIONS_SERVICE_PORT=3000
       - RECOMMENDATIONS_SERVICE_LANG=fr
-      # Yake Algorithm
       - RECOMMENDATIONS_SERVICE_NUMBER_OF_KEYWORDS=7
       - RECOMMENDATIONS_SERVICE_CO_OCCURENCE_WINDOW=3
       - RECOMMENDATIONS_SERVICE_N_GRAM_LENGTH=2
@@ -30,9 +29,9 @@ services:
     ports:
       - 3000:3000
     environment:
-      - APIGW_ENV=production
-      - APIGW_PORT=3000
-      - APIGW_ACCOUNTS_SERVICE_ADDR=accounts:3000
+      - API_GATEWAY_ENV=production
+      - API_GATEWAY_PORT=3000
+      - API_GATEWAY_ACCOUNTS_SERVICE_ADDR=accounts:3000
 
   mongo:
     image: mongo
