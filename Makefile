@@ -5,6 +5,13 @@ clone:
 	stat recommendations-service 	|| git clone --recurse-submodules https://github.com/noted-eip/recommendations-service
 	stat api-gateway 				|| git clone --recurse-submodules https://github.com/noted-eip/api-gateway
 
+# Pull the latest version of the repositories.
+pull:
+	git -C accounts-service pull
+	git -C notes-service pull
+	git -C recommendations-service pull
+	git -C api-gateway pull
+
 # Start the docker compose services.
 up:
 	docker compose up
