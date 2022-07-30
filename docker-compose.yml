@@ -27,7 +27,7 @@ services:
   gateway:
     build: ./api-gateway
     ports:
-      - 3000:3000
+      - 3001:3000
     environment:
       - API_GATEWAY_ENV=production
       - API_GATEWAY_PORT=3000
