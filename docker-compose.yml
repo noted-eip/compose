@@ -1,41 +1,36 @@
 version: "3"
 
 services:
-  accounts:
-    build: ./accounts-service
-    environment:
-      - ACCOUNTS_SERVICE_ENV=production
-      - ACCOUNTS_SERVICE_PORT=3000
-      - ACCOUNTS_SERVICE_MONGO_URI=mongodb://mongo:27017
-      - ACCOUNTS_SERVICE_MONGO_DB_NAME=accounts-service
-
-  recommendations:
-    build: ./recommendations-service
-    environment:
-      - RECOMMENDATIONS_SERVICE_PORT=3000
-      - RECOMMENDATIONS_SERVICE_LANG=fr
-      - RECOMMENDATIONS_SERVICE_NUMBER_OF_KEYWORDS=7
-      - RECOMMENDATIONS_SERVICE_CO_OCCURENCE_WINDOW=3
-      - RECOMMENDATIONS_SERVICE_N_GRAM_LENGTH=2
-      - RECOMMENDATIONS_SERVICE_THRESHOLD=0.8
-
-  notes:
-    build: ./notes-service
-    environment:
-      - NOTES_SERVICE_ENV=production
-      - NOTES_SERVICE_PORT=3000
-      - NOTES_SERVICE_MONGO_URI=mongodb://mongo:27017
-      - NOTES_SERVICE_MONGO_DB_NAME=notes-service
-
   gateway:
-    build: ./api-gateway
+    image: ghcr.io/noted-eip/api-gateway:latest
+    pull_policy: always
     ports:
       - 3000:3000
     environment:
       - API_GATEWAY_ENV=production
       - API_GATEWAY_PORT=3000
       - API_GATEWAY_ACCOUNTS_SERVICE_ADDR=accounts:3000
-      - API_GATEWAY_RECOMMENDATIONS_SERVICE_ADDR=recommendations:3000
+
+  accounts:
+    image: ghcr.io/noted-eip/accounts-service:latest
+    pull_policy: always
+    ports:
+      - 3001:3000
+    environment:
+      - ACCOUNTS_SERVICE_ENV=production
+      - ACCOUNTS_SERVICE_PORT=3000
+      - ACCOUNTS_SERVICE_MONGO_URI=mongodb://mongo:27017
+      - ACCOUNTS_SERVICE_MONGO_DB_NAME=accounts-service
+
+  notes:
+    image: ghcr.io/noted-eip/notes-service:latest
+    pull_policy: alwaysports:
+      - 3002:3000
+    environment:
+      - NOTES_SERVICE_ENV=production
+      - NOTES_SERVICE_PORT=3000
+      - NOTES_SERVICE_MONGO_URI=mongodb://mongo:27017
+      - NOTES_SERVICE_MONGO_DB_NAME=notes-service
 
   mongo:
     image: mongo

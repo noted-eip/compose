@@ -18,4 +18,4 @@ make pull
 
 ## Usage
 
-Once the services are running, you can ping the API gateway on `localhost:3000`.
+Once the services are running, you can ping the API gateway on `localhost:3001`.
