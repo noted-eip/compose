@@ -24,7 +24,8 @@ services:
 
   notes:
     image: ghcr.io/noted-eip/notes-service:latest
-    pull_policy: alwaysports:
+    pull_policy: always
+    ports:
       - 3002:3000
     environment:
       - NOTES_SERVICE_ENV=production
