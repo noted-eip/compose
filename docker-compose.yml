@@ -22,6 +22,17 @@ services:
       - ACCOUNTS_SERVICE_MONGO_URI=mongodb://mongo:27017
       - ACCOUNTS_SERVICE_MONGO_DB_NAME=accounts-service
 
+  notes:
+    image: ghcr.io/noted-eip/notes-service:latest
+    pull_policy: always
+    ports:
+      - 3002:3000
+    environment:
+      - NOTES_SERVICE_ENV=production
+      - NOTES_SERVICE_PORT=3000
+      - NOTES_SERVICE_MONGO_URI=mongodb://mongo:27017
+      - NOTES_SERVICE_MONGO_DB_NAME=notes-service
+
   mongo:
     image: mongo
     volumes:
